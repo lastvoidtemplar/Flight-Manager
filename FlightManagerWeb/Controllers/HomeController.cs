@@ -15,6 +15,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        FlightUser flightUser = new FlightUser();
+        flightUser.SSN ="0123456789";
         return View();
     }
 

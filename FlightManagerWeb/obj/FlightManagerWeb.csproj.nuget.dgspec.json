@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\deyan\\Programming\\Github\\Flight Manager\\FlightManagerWeb\\FlightManagerWeb.csproj": {}
+    "E:\\deyan\\Programming\\Github\\Flight Manager\\flightmanagerweb\\FlightManagerWeb.csproj": {}
   },
   "projects": {
-    "E:\\deyan\\Programming\\Github\\Flight Manager\\FlightManagerWeb\\FlightManagerWeb.csproj": {
+    "E:\\deyan\\Programming\\Github\\Flight Manager\\flightmanagerweb\\FlightManagerWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\deyan\\Programming\\Github\\Flight Manager\\FlightManagerWeb\\FlightManagerWeb.csproj",
+        "projectUniqueName": "E:\\deyan\\Programming\\Github\\Flight Manager\\flightmanagerweb\\FlightManagerWeb.csproj",
         "projectName": "FlightManagerWeb",
-        "projectPath": "E:\\deyan\\Programming\\Github\\Flight Manager\\FlightManagerWeb\\FlightManagerWeb.csproj",
+        "projectPath": "E:\\deyan\\Programming\\Github\\Flight Manager\\flightmanagerweb\\FlightManagerWeb.csproj",
         "packagesPath": "C:\\Users\\dim_m\\.nuget\\packages\\",
-        "outputPath": "E:\\deyan\\Programming\\Github\\Flight Manager\\FlightManagerWeb\\obj\\",
+        "outputPath": "E:\\deyan\\Programming\\Github\\Flight Manager\\flightmanagerweb\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dim_m\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,6 +37,30 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
