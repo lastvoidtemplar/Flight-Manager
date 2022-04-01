@@ -11,9 +11,9 @@ namespace FlightManagerWeb.Models
         /// Only numbers and length 10
         /// </summary>
         /// <value></value>
-        [RegularExpression("^[0-9]{10}$")]
+        // [RegularExpression("^[0-9]{10}$")]
         public string SSN { get; set;}
-        [RegularExpression("/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/")]
+        // [RegularExpression("/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/")]
         public string Email { get; set; }
     }
 }

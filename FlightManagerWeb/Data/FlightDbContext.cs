@@ -7,7 +7,6 @@ namespace FlightManagerWeb.Data
 {
     public class FlightDbContext : IdentityDbContext<FlightUser, IdentityRole, string>
     {
-        public DbSet<TestRegex> testRegices {get;set;}
         public FlightDbContext(DbContextOptions options) : base(options)
         {
         }

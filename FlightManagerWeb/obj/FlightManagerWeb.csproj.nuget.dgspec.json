@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\drugi papki\\Gani\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj": {}
+    "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj": {}
   },
   "projects": {
-    "D:\\drugi papki\\Gani\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj": {
+    "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\drugi papki\\Gani\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj",
+        "projectUniqueName": "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj",
         "projectName": "FlightManagerWeb",
-        "projectPath": "D:\\drugi papki\\Gani\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\drugi papki\\Gani\\Flight-Manager\\FlightManagerWeb\\obj\\",
+        "projectPath": "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj",
+        "packagesPath": "C:\\Users\\dim_m\\.nuget\\packages\\",
+        "outputPath": "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\dim_m\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,9 +38,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.2, )"
+              "version": "[6.0.3, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
@@ -52,11 +54,13 @@
               "target": "Package",
               "version": "[6.0.2, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[6.0.2, )"
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[6.0.3, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -81,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "E:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
