@@ -27,7 +27,6 @@ namespace FlightManagerWeb.Areas.Identity.Pages.Account
         private readonly SignInManager<FlightUser> _signInManager;
         private readonly UserManager<FlightUser> _userManager;
         private readonly IUserStore<FlightUser> _userStore;
-        private readonly IUserEmailStore<FlightUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         // private readonly IEmailSender _emailSender;
 
@@ -39,7 +38,6 @@ namespace FlightManagerWeb.Areas.Identity.Pages.Account
         {
             _userManager = userManager;
             _userStore = userStore;
-            _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
             // _emailSender = emailSender;
@@ -70,14 +68,14 @@ namespace FlightManagerWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
+
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -97,52 +95,62 @@ namespace FlightManagerWeb.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            [Required]
+            [Display(Name = "Firstname")]
+            [StringLength(30, ErrorMessage = "Firstname must contain less than 30 characters")]
+            public string Firstname { get; set; }
+            [Required]
+            [Display(Name = "Lastname")]
+            [StringLength(30, ErrorMessage = "Lastname must contain less than 30 characters")]
+            public string Lastname { get; set; }
+            [Required]
+            [Display(Name = "SSN")]
+            [StringLength(10, MinimumLength = 10, ErrorMessage = "SSN must be 10 character long!")]
+            public string SSN { get; set; }
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+            [Required]
+            [Display(Name = "PhoneNumber")]
+            [Phone]
+            public string PhoneNumber { get; set; }
+            [Required]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.Id = Guid.NewGuid().ToString();
+                user.SecurityStamp = Guid.NewGuid().ToString();
+                user.UserName = Input.Username;
+                user.Firstname = Input.Firstname;
+                user.Lastname = Input.Lastname;
+                user.SSN = Input.SSN;
                 user.Email = Input.Email;
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.PhoneNumber = Input.PhoneNumber;
+                user.Address = Input.Address;
+                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                await _userManager.AddToRoleAsync(user, "User");
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    await _signInManager.SignInAsync(user, isPersistent: false,Input.Username);
+                    return LocalRedirect(returnUrl);
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    // await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
                 }
                 foreach (var error in result.Errors)
                 {
@@ -166,15 +174,6 @@ namespace FlightManagerWeb.Areas.Identity.Pages.Account
                     $"Ensure that '{nameof(FlightUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
-        }
-
-        private IUserEmailStore<FlightUser> GetEmailStore()
-        {
-            if (!_userManager.SupportsUserEmail)
-            {
-                throw new NotSupportedException("The default UI requires a user store with email support.");
-            }
-            return (IUserEmailStore<FlightUser>)_userStore;
         }
     }
 }

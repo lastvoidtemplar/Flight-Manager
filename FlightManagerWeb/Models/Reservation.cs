@@ -6,44 +6,12 @@ namespace FlightManagerWeb.Models
     public class Reservation
     {
         public int Id { get; set; }
-
-
-        [Required]
-        [MaxLength(30)]
-        public string FirstName { get; set; }
-
-
-        [Required]
-        [MaxLength(30)]
-        public string SecondName { get; set; }
-
-
-        [Required]
-        [MaxLength(30)]
-        public string LastName { get; set; }
-
-
-        [Required]
-        [MaxLength(30)]
-        public string EGN { get; set; }
-
-
-        [Required]
-        [MaxLength(30)]
-        public string PhoneNumber { get; set; }
-
-
-        [Required]
-        [MaxLength(30)]
-        public string Nationality { get; set; }
-
-
-        [Required]
-        [MaxLength(30)]
-        public string TicketType { get; set; }
-
-
-        [ForeignKey("Flight")]
+        public DateTime DateAndTimeReservation{ get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+        public bool Confirmed { get; set; }
         public int FlightId { get; set; }
+        public virtual Flight Flight {get;set;}
+        public virtual List<Passager> Passagers { get; set; }
     }
 }
