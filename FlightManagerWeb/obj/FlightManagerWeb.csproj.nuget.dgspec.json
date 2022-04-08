@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj": {}
+    "E:\\deyan\\Programming\\Github\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj": {}
   },
   "projects": {
-    "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj": {
+    "E:\\deyan\\Programming\\Github\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj",
+        "projectUniqueName": "E:\\deyan\\Programming\\Github\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj",
         "projectName": "FlightManagerWeb",
-        "projectPath": "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\FlightManagerWeb.csproj",
+        "projectPath": "E:\\deyan\\Programming\\Github\\Flight-Manager\\FlightManagerWeb\\FlightManagerWeb.csproj",
         "packagesPath": "C:\\Users\\dim_m\\.nuget\\packages\\",
-        "outputPath": "E:\\deyan\\Programming\\Github\\Flight-Manager\\flightmanagerweb\\obj\\",
+        "outputPath": "E:\\deyan\\Programming\\Github\\Flight-Manager\\FlightManagerWeb\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dim_m\\AppData\\Roaming\\NuGet\\NuGet.Config"

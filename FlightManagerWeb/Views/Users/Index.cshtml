@@ -1,0 +1,93 @@
+@using FlightManagerWeb.Models.Users;
+@model IndexViewUser;
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1> 
+<ul class="pagination">
+        @for (var i = 1; i <= Model.CountOfPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-route-CurrentPage="@i" class="page-link">@i</a>
+            </li>
+        }
+ </ul>
+ <form>
+<div class="input-group">
+  <input asp-for="Search.SearchText" type="search" style="max-width:600px" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+  <button type="submit" class="btn btn-outline-primary">search</button>
+</div>
+<div>
+    <label for="search-fields" class="h5">Search: </label>
+    @Html.CheckBoxFor(m => m.Search.EmailIsChecked)<label for="email-search">Email  </label>
+    @Html.CheckBoxFor(m => m.Search.UsernameIsChecked)<label for="username-search">Username  </label>
+    @Html.CheckBoxFor(m => m.Search.FirstnameIsChecked)<label for="firstname-search">Firstname  </label>
+    @Html.CheckBoxFor(m => m.Search.LastnameIsChecked)<label for="email-search">Lastname  </label>
+</div>
+
+ </form>
+ 
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Username
+            </th>
+            <th>
+                Firstname
+            </th>
+            <th>
+                Lastname
+            </th>
+            <th>
+                SSN
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                PhoneNumber </th>
+            <th>
+                Address </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SSN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

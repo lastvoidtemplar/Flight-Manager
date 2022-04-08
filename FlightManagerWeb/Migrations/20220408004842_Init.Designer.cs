@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightManagerWeb.Migrations
 {
     [DbContext(typeof(FlightDbContext))]
-    [Migration("20220406220707_Init")]
+    [Migration("20220408004842_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,15 +70,12 @@ namespace FlightManagerWeb.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PlaneNumber")
                         .IsUnique();
 
-                    b.ToTable("Flight");
+                    b.ToTable("Flights");
                 });
 
             modelBuilder.Entity("FlightManagerWeb.Models.FlightUser", b =>
@@ -176,21 +173,21 @@ namespace FlightManagerWeb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9c4a1d5a-c1e6-4bcd-9d28-142d56e643e4",
+                            Id = "2ffd6ef8-70b9-410b-a2f1-d483a44be25e",
                             AccessFailedCount = 0,
                             Address = "AdminAddress",
-                            ConcurrencyStamp = "4f9a005a-2120-48c0-8750-ea7dc7b7d335",
+                            ConcurrencyStamp = "2fdb67c0-d8f9-403e-840b-9e173e6e6ec2",
                             Email = "admin123@flight.com",
                             EmailConfirmed = false,
                             Firstname = "Admin",
                             Lastname = "Admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAED/bL5hAglMVsMhRdNKDV1tHqdVbFZE9t2qizUOL4UT4lFmelQxank76gEtXpCzmUw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBllwVTSewqraTLtHfV2uDHozcKnM7k2mfwNxha/Z2UYhPOdGLN1A8Ly8xz6xNRieA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             SSN = "1234567890",
-                            SecurityStamp = "8d654fe5-637d-41e2-90f6-d6eb2afa50da",
+                            SecurityStamp = "c78aa47b-fcc8-4a33-9f2f-4e7ef69583f8",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -248,7 +245,7 @@ namespace FlightManagerWeb.Migrations
                     b.HasIndex("SSN")
                         .IsUnique();
 
-                    b.ToTable("Passager");
+                    b.ToTable("Passagers");
 
                     b.HasCheckConstraint("CK_TicketTypes", "TicketType in ('Normal','Business')");
                 });
@@ -278,7 +275,7 @@ namespace FlightManagerWeb.Migrations
 
                     b.HasIndex("FlightId");
 
-                    b.ToTable("Reservation");
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -316,15 +313,15 @@ namespace FlightManagerWeb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f1db342f-937e-4a9e-81f5-1cd3d4d77bac",
-                            ConcurrencyStamp = "916142e1-1cfc-402d-9dfd-200531b76427",
+                            Id = "94505bab-0574-40b7-ac9a-5f38d4cbb8f9",
+                            ConcurrencyStamp = "424b5e8c-9172-4c67-9d77-fd44ee55623f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "de21c5fd-c338-4b6c-b0ca-2bffbd8288cc",
-                            ConcurrencyStamp = "64a87a6d-0973-4f5b-aff4-31cce1eb9994",
+                            Id = "f279d43c-f755-442a-953c-8ef89fd11b56",
+                            ConcurrencyStamp = "7f128d0d-1efc-4125-8e00-5441a6d55c45",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -419,8 +416,8 @@ namespace FlightManagerWeb.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "9c4a1d5a-c1e6-4bcd-9d28-142d56e643e4",
-                            RoleId = "f1db342f-937e-4a9e-81f5-1cd3d4d77bac"
+                            UserId = "2ffd6ef8-70b9-410b-a2f1-d483a44be25e",
+                            RoleId = "94505bab-0574-40b7-ac9a-5f38d4cbb8f9"
                         });
                 });
 

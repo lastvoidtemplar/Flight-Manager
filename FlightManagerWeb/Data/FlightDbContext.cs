@@ -7,6 +7,10 @@ namespace FlightManagerWeb.Data
 {
     public class FlightDbContext : IdentityDbContext<FlightUser, IdentityRole, string>
     {
+        public DbSet<Flight> Flights {get;set;}
+        public DbSet<Reservation> Reservations {get;set;}
+        public DbSet<Passager> Passagers {get;set;}
+
         public FlightDbContext(DbContextOptions options) : base(options)
         {
         }

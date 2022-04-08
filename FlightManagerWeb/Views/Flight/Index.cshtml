@@ -1,0 +1,97 @@
+@model FlightManagerWeb.Models.IndexFlight
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<ul class="pagination">
+        @for (var i = 1; i <= Model.CountOfPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-route-CurrentPage="@i" class="page-link">@i</a>
+            </li>
+        }
+ </ul>
+ <form>
+<div class="input-group">
+  <input asp-for="Search" type="search" style="max-width:600px" class="form-control rounded" placeholder="Search" aria-describedby="search-addon" />
+  <button type="submit" class="btn btn-outline-primary">search</button>
+</div>
+ </form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                LocationFrom
+            </th>
+            <th>
+               LocationTo
+            </th>
+            <th>
+                DepartureTimeAndDate
+            </th>
+            <th>
+               Duration
+            </th>
+            <th>
+               PlaneType
+            </th>
+            <th>
+                PlaneNumber
+            </th>
+            <th>
+                PilotName
+            </th>
+            <th>
+                CapacityBusinessClass
+            </th>
+            <th>
+               PlaneCapacity
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Flights) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTimeAndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaneType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CapacityBusinessClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaneCapacity)
+            </td>
+            <td>
+                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

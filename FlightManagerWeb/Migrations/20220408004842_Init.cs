@@ -54,7 +54,7 @@ namespace FlightManagerWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Flight",
+                name: "Flights",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -67,12 +67,11 @@ namespace FlightManagerWeb.Migrations
                     PlaneNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     PilotName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     CapacityBusinessClass = table.Column<int>(type: "int", nullable: false),
-                    PlaneCapacity = table.Column<int>(type: "int", nullable: false),
-                    ReservationId = table.Column<int>(type: "int", nullable: false)
+                    PlaneCapacity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Flight", x => x.Id);
+                    table.PrimaryKey("PK_Flights", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,7 +181,7 @@ namespace FlightManagerWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reservation",
+                name: "Reservations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -194,17 +193,17 @@ namespace FlightManagerWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservation", x => x.Id);
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservation_Flight_FlightId",
+                        name: "FK_Reservations_Flights_FlightId",
                         column: x => x.FlightId,
-                        principalTable: "Flight",
+                        principalTable: "Flights",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Passager",
+                name: "Passagers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -220,12 +219,12 @@ namespace FlightManagerWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Passager", x => x.Id);
+                    table.PrimaryKey("PK_Passagers", x => x.Id);
                     table.CheckConstraint("CK_TicketTypes", "TicketType in ('Normal','Business')");
                     table.ForeignKey(
-                        name: "FK_Passager_Reservation_ReservationId",
+                        name: "FK_Passagers_Reservations_ReservationId",
                         column: x => x.ReservationId,
-                        principalTable: "Reservation",
+                        principalTable: "Reservations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -233,22 +232,22 @@ namespace FlightManagerWeb.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "de21c5fd-c338-4b6c-b0ca-2bffbd8288cc", "64a87a6d-0973-4f5b-aff4-31cce1eb9994", "User", "USER" });
+                values: new object[] { "94505bab-0574-40b7-ac9a-5f38d4cbb8f9", "424b5e8c-9172-4c67-9d77-fd44ee55623f", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f1db342f-937e-4a9e-81f5-1cd3d4d77bac", "916142e1-1cfc-402d-9dfd-200531b76427", "Admin", "ADMIN" });
+                values: new object[] { "f279d43c-f755-442a-953c-8ef89fd11b56", "7f128d0d-1efc-4125-8e00-5441a6d55c45", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SSN", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9c4a1d5a-c1e6-4bcd-9d28-142d56e643e4", 0, "AdminAddress", "4f9a005a-2120-48c0-8750-ea7dc7b7d335", "admin123@flight.com", false, "Admin", "Admin", false, null, null, "ADMIN", "AQAAAAEAACcQAAAAED/bL5hAglMVsMhRdNKDV1tHqdVbFZE9t2qizUOL4UT4lFmelQxank76gEtXpCzmUw==", "1234567890", false, "1234567890", "8d654fe5-637d-41e2-90f6-d6eb2afa50da", false, "admin" });
+                values: new object[] { "2ffd6ef8-70b9-410b-a2f1-d483a44be25e", 0, "AdminAddress", "2fdb67c0-d8f9-403e-840b-9e173e6e6ec2", "admin123@flight.com", false, "Admin", "Admin", false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEBllwVTSewqraTLtHfV2uDHozcKnM7k2mfwNxha/Z2UYhPOdGLN1A8Ly8xz6xNRieA==", "1234567890", false, "1234567890", "c78aa47b-fcc8-4a33-9f2f-4e7ef69583f8", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "f1db342f-937e-4a9e-81f5-1cd3d4d77bac", "9c4a1d5a-c1e6-4bcd-9d28-142d56e643e4" });
+                values: new object[] { "94505bab-0574-40b7-ac9a-5f38d4cbb8f9", "2ffd6ef8-70b9-410b-a2f1-d483a44be25e" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -310,25 +309,25 @@ namespace FlightManagerWeb.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flight_PlaneNumber",
-                table: "Flight",
+                name: "IX_Flights_PlaneNumber",
+                table: "Flights",
                 column: "PlaneNumber",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Passager_ReservationId",
-                table: "Passager",
+                name: "IX_Passagers_ReservationId",
+                table: "Passagers",
                 column: "ReservationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Passager_SSN",
-                table: "Passager",
+                name: "IX_Passagers_SSN",
+                table: "Passagers",
                 column: "SSN",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservation_FlightId",
-                table: "Reservation",
+                name: "IX_Reservations_FlightId",
+                table: "Reservations",
                 column: "FlightId");
         }
 
@@ -350,7 +349,7 @@ namespace FlightManagerWeb.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Passager");
+                name: "Passagers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -359,10 +358,10 @@ namespace FlightManagerWeb.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Reservation");
+                name: "Reservations");
 
             migrationBuilder.DropTable(
-                name: "Flight");
+                name: "Flights");
         }
     }
 }

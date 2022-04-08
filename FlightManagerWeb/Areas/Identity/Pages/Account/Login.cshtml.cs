@@ -103,7 +103,7 @@ namespace FlightManagerWeb.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 try
                 {
-                    FlightUser claimUser = flightUserService.GetFlightYserIdByUsername(Input.UserName);
+                    FlightUser claimUser =await flightUserService.GetFlightYserIdByUsername(Input.UserName);
                 var result = await _signInManager.PasswordSignInAsync(claimUser, Input.Password,
                  Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
