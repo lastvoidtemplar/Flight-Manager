@@ -2,6 +2,7 @@ using FlightManagerWeb.Data;
 using FlightManagerWeb.Models;
 using FlightManagerWeb.Models.Reservations;
 using FlightManagerWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text.Json;
@@ -10,9 +11,11 @@ namespace FlightManagerWeb.Controllers
     public class ReservationController : Controller
     {
         private readonly ReservationService reservationService;
+        private readonly EmailService emailService;
         public ReservationController(FlightDbContext context)
         {
             reservationService = new ReservationService(context);
+            emailService = new EmailService(context);
         }
         const int pageSize = 10;
         public async Task<IActionResult> Index(IndexReservation model)
@@ -76,26 +79,67 @@ namespace FlightManagerWeb.Controllers
             model.PassagerData.Passagers = reservationService.PassangersReservation(model.PassagerData.CurrentPassager, pageSize, model.Id);
             return View(model);
         }
-      
-        public IActionResult CreatePassager( string id)
+        public async Task<IActionResult> SendEmail(string id)
         {
-            Passager model =new Passager();
+            
+                emailService.SendReservationConfirmation(id);
+                return LocalRedirect($"~/");
+        
+            return LocalRedirect("~/Flight/Index");
+        }
+        public IActionResult CreatePassager(string id)
+        {
+            Passager model = new Passager();
             model.ReservationId = id;
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> CreatePassager(Passager model)
         {
-            // try
-            // {
+            try
+            {
                 reservationService.CreatePassager(model);
                 return LocalRedirect($"~/Reservation/Edit/{model.ReservationId}");
-            // }
-            // catch (System.Exception ex)
-            // {
-            //     ModelState.AddModelError(string.Empty, ex.Message);
-            //    }
-            // return LocalRedirect("~/Flight/Index");
+            }
+            catch (System.Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            return LocalRedirect("~/Flight/Index");
+        }
+        public async Task<IActionResult> ReservationConfirmation(string id)
+        {
+            return View(id);
+        }
+        public async Task<IActionResult> Comfirm(string id)
+        {
+            try
+            {
+                reservationService.ComfirmReservation(id);
+                return LocalRedirect("~/");
+            }
+            catch (System.Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            return LocalRedirect("~/");
+        }
+                [Authorize(Roles= "User")]
+         public async Task<IActionResult> Details(string id)
+        {
+            EditResservation model = new EditResservation();
+            model.Id = id;
+            if (model.Email == null || model.Email == "")
+            {
+                model.Email = reservationService.GetEmailOFReservationById(model.Id);
+                model.FlightInfo = reservationService.GetFlightInfoOFReservationById(model.Id);
+                model.PassagerData = new PassagerData();
+                model.PassagerData.CurrentPassager = 1;
+                model.PassagerData.PassagerCount = reservationService.PassangersReservationCount(pageSize, model.Id);
+            }
+            model.PassagerData.Passagers = reservationService.PassangersReservation(model.PassagerData.CurrentPassager, pageSize, model.Id);
+            return View(model);
         }
     }
+
 }

@@ -1,20 +1,16 @@
 @model FlightManagerWeb.Models.Reservations.EditResservation
 @{
-    ViewData["Title"] = "Add Passanger";
+    ViewData["Title"] = "Detail";
 }
 
 
 <form asp-action="SendEmail" asp-route-Id = "@Model.Id" method="post">
-    <h1>Add Passanger</h1>
+    <h1>Details</h1>
 <p>
     <label asp-for="Email" class="form-floating"></label> @Model.Email
 </p>
 <p>
     <label asp-for="FlightInfo" class="form-floating"></label> @Model.FlightInfo
-</p>
-
-<p>
-    <a asp-action="CreatePassager" asp-route-Id="@Model.Id">Add new Passanger</a>
 </p>
 <ul class="pagination">
     @for (var i = 1; i <= Model.PassagerData.PassagerCount; i++)

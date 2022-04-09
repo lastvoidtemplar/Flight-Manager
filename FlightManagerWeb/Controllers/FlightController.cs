@@ -1,6 +1,8 @@
+using System.Net;
 using FlightManagerWeb.Data;
 using FlightManagerWeb.Models;
 using FlightManagerWeb.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightManagerWeb.Controllers
@@ -13,6 +15,7 @@ namespace FlightManagerWeb.Controllers
             flightSevice = new FlightService(context);
         }
         const int pageSize = 10;
+        [Authorize(Roles= "User")]
         public async Task<IActionResult> Index(IndexFlight model)
         {
             System.Console.WriteLine(model?.CountOfPages);
@@ -32,12 +35,15 @@ namespace FlightManagerWeb.Controllers
             if (model.CountOfPages == 0) model.CountOfPages = await flightSevice.NumberOfPages(pageSize, model.Search);
             model.Flights = flightSevice.IndexAllFlights(model.CurrentPage, pageSize, model.Search);
             return View(model);
-        }
+        } 
+        [Authorize(Roles= "Admin")]
         public IActionResult Create()
         {
             Flight model = new Flight();
             return View(model);
         }
+             
+        [Authorize(Roles= "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Flight model)
@@ -52,6 +58,7 @@ namespace FlightManagerWeb.Controllers
                 }
                         return LocalRedirect("~/Flight/Index");
         }
+        [Authorize(Roles= "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
@@ -67,6 +74,7 @@ namespace FlightManagerWeb.Controllers
 
             return View(flight);
         }
+        [Authorize(Roles= "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Flight flight)
@@ -82,6 +90,8 @@ namespace FlightManagerWeb.Controllers
                 }
             return LocalRedirect("~/Flight/Index");
         }
+                
+        [Authorize(Roles= "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)

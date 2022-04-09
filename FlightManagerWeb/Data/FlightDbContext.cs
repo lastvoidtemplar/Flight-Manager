@@ -65,6 +65,10 @@ namespace FlightManagerWeb.Data
                 RoleId = adminRoleId,
                 UserId = adminUser.Id
             });
+            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>(){
+                RoleId = userRoleId,
+                UserId = adminUser.Id
+            });
         }
     }
 }

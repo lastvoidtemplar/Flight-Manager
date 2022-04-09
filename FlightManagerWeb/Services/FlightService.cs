@@ -40,7 +40,6 @@ namespace FlightManagerWeb.Services
             return (int)Math.Ceiling(countPages);
         }
          public async Task CreateFlight(Flight flight){
-             System.Console.WriteLine("ADDINF");
             await  _context.Flights.AddAsync(flight);
             System.Console.WriteLine(await _context.SaveChangesAsync()==1);
         }

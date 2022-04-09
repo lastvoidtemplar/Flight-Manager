@@ -43,7 +43,7 @@ namespace FlightManagerWeb.Services
             Reservation reservation = new Reservation();
             reservation.Id = Guid.NewGuid().ToString();
             reservation.DateAndTimeReservation = DateTime.Now;
-            reservation.Confirmed = false;
+            reservation.Confirmed = true;
             reservation.Email = email;
             reservation.FlightId = flightId;
             await _context.Reservations.AddAsync(reservation);
@@ -74,6 +74,12 @@ namespace FlightManagerWeb.Services
         public void CreatePassager(Passager passager){
             _context.Passagers.Add(passager);
             _context.SaveChanges();
+        }
+        public void ComfirmReservation(string id){
+          var reservation =   _context.Reservations.Find(id);
+          reservation.Confirmed = true;
+          _context.Reservations.Update(reservation);
+          _context.SaveChanges();
         }
     }
 }
