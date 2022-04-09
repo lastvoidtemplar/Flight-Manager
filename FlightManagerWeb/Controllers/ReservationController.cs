@@ -18,6 +18,7 @@ namespace FlightManagerWeb.Controllers
             emailService = new EmailService(context);
         }
         const int pageSize = 10;
+        [Authorize(Roles="User")]
         public async Task<IActionResult> Index(IndexReservation model)
         {
             if (model == null)
@@ -105,7 +106,7 @@ namespace FlightManagerWeb.Controllers
             {
                 ModelState.AddModelError(string.Empty, ex.Message);
             }
-            return LocalRedirect("~/Flight/Index");
+                return LocalRedirect($"~/Reservation/Edit/{model.ReservationId}");
         }
         public async Task<IActionResult> ReservationConfirmation(string id)
         {

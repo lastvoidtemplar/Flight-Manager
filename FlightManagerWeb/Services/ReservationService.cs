@@ -67,11 +67,29 @@ namespace FlightManagerWeb.Services
         }
         public int PassangersReservationCount(int pageSize,string id)
         {
-            
             double passangers= _context.Passagers.Where(passanger=>passanger.ReservationId==id).Count();
             return (int)Math.Ceiling(passangers/pageSize);
         }
         public void CreatePassager(Passager passager){
+            var reservation = _context.Reservations.Find(passager.ReservationId);
+            var flight = _context.Flights.Find(reservation.FlightId);
+            var reservations = _context.Reservations.Where(res=>res.FlightId == reservation.FlightId);
+            System.Console.WriteLine("SDFGHJK");
+            int normal = 0;
+            int bisClass = 0;
+            foreach (var res in reservations) {
+            var passs = _context.Passagers.Where(pas=>pas.ReservationId==res.Id);
+           
+                foreach (var pas in passs)
+                {
+                    if(pas.TicketType=="Normal")normal++;
+                    else bisClass++;
+                }
+            }
+            System.Console.WriteLine(normal);
+            System.Console.WriteLine(bisClass);
+            if(passager.TicketType=="Normal"&&flight.PlaneCapacity-flight.CapacityBusinessClass<=normal)throw new ArgumentException("Normal class is full");
+            if(passager.TicketType=="Business"&&flight.CapacityBusinessClass<=bisClass)throw new ArgumentException("BissnessClass class is full");
             _context.Passagers.Add(passager);
             _context.SaveChanges();
         }

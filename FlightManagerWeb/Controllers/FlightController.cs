@@ -50,7 +50,11 @@ namespace FlightManagerWeb.Controllers
         {
                 try
                 {
-                    await flightSevice.CreateFlight(model);
+                    if(model.DepartureTimeAndDate<=model.ArrivalTimeAndDate)
+                    {
+                        await flightSevice.CreateFlight(model);
+                    }
+                    
                 }
                 catch (System.Exception ex)
                 {
