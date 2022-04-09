@@ -1,0 +1,135 @@
+@using Newtonsoft.Json
+@model FlightManagerWeb.Models.Reservations.CreateReservation
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CreateReservation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Save" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                
+                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email"></label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <ul class="pagination">
+                @for (var i = 1; i <= Model.AvailableFlightsData.CountOfPages; i++)
+                {
+                    <li class="page-item @(i == Model.AvailableFlightsData.CurrentPage ? "active" : "")">
+                        <a asp-route-AvailableFlightsData.CurrentPage="@i" 
+                        asp-route-AvailableFlightsData.CountOfPages="@Model.AvailableFlightsData.CountOfPages"
+                        asp-route-Email="@Model.Email" 
+                        asp-route-FlightId="@Model.FlightId"
+                         class="page-link">@i</a>
+                    </li>
+                }
+            </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            LocationFrom
+                        </th>
+                        <th>
+                            LocationTo
+                        </th>
+                        <th>
+                            DepartureTimeAndDate
+                        </th>
+                        <th>
+                            Duration
+                        </th>
+                        <th>
+                            PlaneType
+                        </th>
+                        <th>
+                            PlaneNumber
+                        </th>
+                        <th>
+                            PilotName
+                        </th>
+                        <th>
+                            CapacityBusinessClass
+                        </th>
+                        <th>
+                            PlaneCapacity
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.AvailableFlightsData.flights)
+                    {
+                        <tr>
+                            <td>
+                                <input type="radio"  asp-for ="FlightId" value="@item.Id"/>
+                                
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LocationFrom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LocationTo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DepartureTimeAndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Duration)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlaneType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlaneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PilotName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CapacityBusinessClass)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PlaneCapacity)
+                            </td>
+                        </tr>
+                
+                    }</tbody></table>
+                    <div class="form-floating">
+                        <input type="submit" value="Register Passagers" class="btn btn-primary" />
+                    </div>
+                     <div>
+                       <a asp-action="Index">Back to List</a>
+                    </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+ <environment include="Development">
+    <script src="~/Identity/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/Identity/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
+        asp-fallback-src="~/Identity/lib/jquery-validation/dist/jquery.validate.min.js"
+        asp-fallback-test="window.jQuery && window.jQuery.validator" crossorigin="anonymous"
+        integrity="sha384-rZfj/ogBloos6wzLGpPkkOr/gpkBNLZ6b6yLy4o+ok+t/SAKlL5mvXLr0OXNi1Hp">
+        </script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"
+        asp-fallback-src="~/Identity/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+        asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive"
+        crossorigin="anonymous" integrity="sha384-R3vNCHsZ+A2Lo3d5A6XNP7fdQkeswQWTIPfiYwSpEP3YV079R+93YzTeZRah7f/F">
+        </script>
+        
+</environment>
+}

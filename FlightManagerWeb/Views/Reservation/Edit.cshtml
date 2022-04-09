@@ -1,0 +1,78 @@
+@model FlightManagerWeb.Models.Reservations.EditResservation
+@{
+    ViewData["Title"] = "Add Passanger";
+}
+
+<h1>Add Passanger</h1>
+<p>
+    <label asp-for="Email" class="form-floating" ></label> @Model.Email
+</p>
+<p>
+   <label asp-for="FlightInfo" class="form-floating"></label> @Model.FlightInfo
+</p>
+
+<p>
+    <a asp-action="CreatePassager" asp-route-Id="@Model.Id">Add new Passanger</a>
+</p>
+    <ul class="pagination">
+                @for (var i = 1; i <= Model.PassagerData.PassagerCount; i++)
+                {
+                    <li class="page-item @(i == Model.PassagerData.CurrentPassager? "active" : "")">
+                        <a asp-route-Id = "@Model.Id" class="page-link">@i</a>
+                    </li>
+                    } 
+                </ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                FirstName
+            </th>
+            <th>
+               SecondName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                SSN
+            </th>
+            <th>
+                PhoneNumber
+            </th>
+            <th>
+                Nationality
+            </th>
+            <th>
+                TicketType
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.PassagerData.Passagers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketType)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

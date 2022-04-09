@@ -66,8 +66,8 @@ namespace FlightManagerWeb.Migrations
                     PlaneType = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     PlaneNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     PilotName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    CapacityBusinessClass = table.Column<int>(type: "int", nullable: false),
-                    PlaneCapacity = table.Column<int>(type: "int", nullable: false)
+                    PlaneCapacity = table.Column<int>(type: "int", nullable: false),
+                    CapacityBusinessClass = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -184,8 +184,7 @@ namespace FlightManagerWeb.Migrations
                 name: "Reservations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DateAndTimeReservation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Confirmed = table.Column<bool>(type: "bit", nullable: false),
@@ -215,7 +214,7 @@ namespace FlightManagerWeb.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     TicketType = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    ReservationId = table.Column<int>(type: "int", nullable: false)
+                    ReservationId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,22 +231,22 @@ namespace FlightManagerWeb.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "94505bab-0574-40b7-ac9a-5f38d4cbb8f9", "424b5e8c-9172-4c67-9d77-fd44ee55623f", "Admin", "ADMIN" });
+                values: new object[] { "01fd28e0-8c5c-41ad-bd99-d20bfb351ae7", "836ff452-1c93-4d07-bfe4-f20baa9ad5d9", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f279d43c-f755-442a-953c-8ef89fd11b56", "7f128d0d-1efc-4125-8e00-5441a6d55c45", "User", "USER" });
+                values: new object[] { "e36c50ea-8521-44c7-be00-76920e62d9df", "0038d024-e51f-424a-a703-85976fe36f34", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "Firstname", "Lastname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SSN", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2ffd6ef8-70b9-410b-a2f1-d483a44be25e", 0, "AdminAddress", "2fdb67c0-d8f9-403e-840b-9e173e6e6ec2", "admin123@flight.com", false, "Admin", "Admin", false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEBllwVTSewqraTLtHfV2uDHozcKnM7k2mfwNxha/Z2UYhPOdGLN1A8Ly8xz6xNRieA==", "1234567890", false, "1234567890", "c78aa47b-fcc8-4a33-9f2f-4e7ef69583f8", false, "admin" });
+                values: new object[] { "eb872793-aeef-4be0-b205-f8230ee7beb3", 0, "AdminAddress", "d365d8eb-4080-4065-a300-e3b748e77da9", "admin123@flight.com", false, "Admin", "Admin", false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEPJiYNVs9NOq9+0AHADwdC9oBsgg3FcVU3Bwmhgs/fBNwerGDA7EXUYTnydY0Cuorw==", "1234567890", false, "1234567890", "31520443-2a52-4875-b8e2-0ba49a0f1107", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "94505bab-0574-40b7-ac9a-5f38d4cbb8f9", "2ffd6ef8-70b9-410b-a2f1-d483a44be25e" });
+                values: new object[] { "01fd28e0-8c5c-41ad-bd99-d20bfb351ae7", "eb872793-aeef-4be0-b205-f8230ee7beb3" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

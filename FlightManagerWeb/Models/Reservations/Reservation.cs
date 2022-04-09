@@ -5,7 +5,7 @@ namespace FlightManagerWeb.Models
 {
     public class Reservation
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public DateTime DateAndTimeReservation{ get; set; }
         [EmailAddress]
         public string Email { get; set; }

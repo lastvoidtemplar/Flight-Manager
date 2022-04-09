@@ -49,7 +49,7 @@ namespace FlightManagerWeb.Models
         [Required]
         [MaxLength(30)]
          public string TicketType { get; set; }
-        public int ReservationId { get; set; }
+        public string ReservationId { get; set; }
         public Reservation Reservation { get; set; }
     }
 }

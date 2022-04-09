@@ -1,0 +1,61 @@
+@model FlightManagerWeb.Models.Reservations.IndexReservation
+
+@{
+    ViewData["Title"] = "Index";
+}
+<ul class="pagination">
+    @for (var i = 1; i <= Model.CountOfPages; i++)
+    {
+        <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+            <a asp-route-CurrentPage="@i" asp-route-Email="@Model.Email" class="page-link">@i</a>
+        </li>
+    }
+</ul>
+<form>
+    <div class="input-group">
+        <input asp-for="Email" type="search" style="max-width:600px" class="form-control rounded" placeholder="Search"
+            aria-describedby="search-addon" />
+        <button type="submit" class="btn btn-outline-primary">search</button>
+    </div>
+</form>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                DateAndTimeReservation
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                FlightId
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Reservations)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAndTimeReservation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightId)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

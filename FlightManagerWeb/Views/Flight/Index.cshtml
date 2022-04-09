@@ -9,7 +9,7 @@
         @for (var i = 1; i <= Model.CountOfPages; i++)
         {
             <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                <a asp-route-CurrentPage="@i" class="page-link">@i</a>
+                <a asp-route-CurrentPage="@i"asp-route-Search=@Model.Search class="page-link">@i</a>
             </li>
         }
  </ul>

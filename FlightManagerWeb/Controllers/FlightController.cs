@@ -5,33 +5,35 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FlightManagerWeb.Controllers
 {
-    public class FlightController:Controller
+    public class FlightController : Controller
     {
         private readonly FlightService flightSevice;
         public FlightController(FlightDbContext context)
         {
-            flightSevice =new FlightService(context) ;
+            flightSevice = new FlightService(context);
         }
-         const int pageSize = 10;
-        public async Task<IActionResult> Index(IndexFlight model){
+        const int pageSize = 10;
+        public async Task<IActionResult> Index(IndexFlight model)
+        {
             System.Console.WriteLine(model?.CountOfPages);
-            if(model==null)
+            if (model == null)
             {
                 model = new IndexFlight();
-                 model.CurrentPage = 1;
-                model.CountOfPages = await flightSevice.NumberOfPages(pageSize,model.Search);
+                model.CurrentPage = 1;
+                model.CountOfPages = await flightSevice.NumberOfPages(pageSize, model.Search);
                 model.Search = "";
             }
-            if(model.Search==null)model.Search = "";
-            if(model.CurrentPage <=0){
-                
-                 model.CurrentPage = 1;
+            if (model.Search == null) model.Search = "";
+            if (model.CurrentPage <= 0)
+            {
+
+                model.CurrentPage = 1;
             }
-            if(model.CountOfPages==0)model.CountOfPages = await flightSevice.NumberOfPages(pageSize,model.Search);
-            model.Flights = flightSevice.IndexAllFlights(model.CurrentPage, pageSize,model.Search);
+            if (model.CountOfPages == 0) model.CountOfPages = await flightSevice.NumberOfPages(pageSize, model.Search);
+            model.Flights = flightSevice.IndexAllFlights(model.CurrentPage, pageSize, model.Search);
             return View(model);
         }
-         public  IActionResult Create()
+        public IActionResult Create()
         {
             Flight model = new Flight();
             return View(model);
@@ -40,20 +42,17 @@ namespace FlightManagerWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Flight model)
         {
-            System.Console.WriteLine("Controller");
                 try
                 {
-                    System.Console.WriteLine( "contr try");
                     await flightSevice.CreateFlight(model);
                 }
                 catch (System.Exception ex)
                 {
-                     return NotFound(ex.Message);
+                     ModelState.AddModelError(string.Empty, ex.Message);
                 }
-
-            return LocalRedirect("~/Flight/Index");
+                        return LocalRedirect("~/Flight/Index");
         }
-         public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
@@ -68,35 +67,35 @@ namespace FlightManagerWeb.Controllers
 
             return View(flight);
         }
-                [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Flight flight)
         {
+          
                 try
                 {
-                     await flightSevice.UpdateFlight(flight);
+                    await flightSevice.UpdateFlight(flight);
                 }
                 catch (System.Exception ex)
                 {
-                     return NotFound();
+                    return NotFound();
                 }
-
             return LocalRedirect("~/Flight/Index");
         }
-                public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                     await flightSevice.DeleteFlight(id);
+                    await flightSevice.DeleteFlight(id);
                 }
                 catch (System.Exception ex)
                 {
-                     return NotFound(ex.Message);
+                    return NotFound(ex.Message);
                 }
-               
-  
+
+
             }
 
             return LocalRedirect("~/Flight/Index");
