@@ -1,3 +1,5 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<FlightUser> SignInManager
 @model FlightManagerWeb.Models.IndexFlight
 
 @{
@@ -87,9 +89,13 @@
                 @Html.DisplayFor(modelItem => item.PlaneCapacity)
             </td>
             <td>
-                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @if(User.IsInRole("Admin")){
+                <span>
+                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>  
+                </span>
+                }
+                 
             </td>
         </tr>
 }
