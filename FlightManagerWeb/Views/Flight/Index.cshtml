@@ -21,9 +21,11 @@
   <button type="submit" class="btn btn-outline-primary">search</button>
 </div>
  </form>
+@if(User.IsInRole("Admin")){
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+}
 <table class="table">
     <thead>
         <tr>
